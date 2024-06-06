@@ -26,10 +26,10 @@ const Jiratable = () => {
   };
 
   useEffect(() => {
-    Call_Jira_Api(filter_status);
+    CallJiraApi(filter_status);
   }, [pagesize, nextPage]);
 
-  const Call_Jira_Api = async (status) => {
+  const CallJiraApi = async (status) => {
     setLoaderState(true);
     let jqlQuery;
     if (status === undefined) {
@@ -101,7 +101,7 @@ const Jiratable = () => {
                   className="form-select"
                   defaultValue={filter_status}
                   onChange={(end) => {
-                    Call_Jira_Api(end.target.value);
+                    CallJiraApi(end.target.value);
                     setFilter_status(end.target.value);
                   }}
                 >
@@ -120,7 +120,7 @@ const Jiratable = () => {
                   onClick={() => {
                     setShow(!show);
                     setFilter_status();
-                    Call_Jira_Api();
+                    CallJiraApi();
                   }}
                 />
               </Col>
