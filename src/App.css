@@ -96,7 +96,7 @@ H3.tableHeading {
   border-radius: 0;
   margin-right: 10px;
 }
-.supply_filterbox {
+.filterbox {
   background-color: rgb(241, 239, 239);
   align-items: baseline !important;
   padding-bottom: 10px !important;
@@ -137,6 +137,17 @@ H3.tableHeading {
 .cbtn.addBtn {
   width: auto;
   background: #1a1a1a;
+}
+.IconColr {
+  float: right;
+  margin: 5px 0;
+  margin-right: -5px;
+  font-size: 30px;
+  padding: 2px 5px;
+  color: white;
+  background-color: #1a1a1a;
+  border: 1px solid black;
+  cursor: pointer;
 }
 
 button.cbtn.addBtn:disabled {

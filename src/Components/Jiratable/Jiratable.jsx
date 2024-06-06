@@ -8,12 +8,7 @@ import { Col, Row } from "react-bootstrap";
 import { FiFilter } from "react-icons/fi";
 import { BiReset } from "react-icons/bi";
 import SpinnerLoader from "../Spinner/Spinner";
-import {
-  TableCell,
-  TableRow,
-  TableBody,
-  autocompleteClasses,
-} from "@mui/material";
+import { TableCell, TableRow } from "@mui/material";
 window.Buffer = window.Buffer || require("buffer").Buffer;
 const Jiratable = () => {
   const [pagesize, setPagesize] = useState(10);
@@ -63,7 +58,6 @@ const Jiratable = () => {
       );
       setData(response.data.issues);
       setData_Length(response.data.total);
-      console.log(response, "responseresponse");
     } catch (err) {
       if (err.response) {
         alert(`Error ${err.response.status} `);
@@ -91,18 +85,7 @@ const Jiratable = () => {
             </div>
 
             <FiFilter
-              className="supplyIconColr"
-              style={{
-                float: "right",
-                margin: "5px 0px",
-                marginRight: "-5px",
-                fontSize: "30px",
-                padding: "2px 5px",
-                color: "white",
-                backgroundColor: "#1a1a1a",
-                border: "1px solid black",
-                cursor: "pointer",
-              }}
+              className="IconColr"
               onClick={() => {
                 setShow(!show);
               }}
@@ -111,8 +94,8 @@ const Jiratable = () => {
 
           <hr />
           {show ? (
-            <Row className="supply_filterbox">
-              <Col lg={6} md={6} xs={11} className="supply_col">
+            <Row className="filterbox">
+              <Col lg={6} md={6} xs={11} className="">
                 <select
                   id="addPredefinedstyle"
                   className="form-select"
@@ -150,21 +133,11 @@ const Jiratable = () => {
                   <Table className="customTable">
                     <thead className="">
                       <TableRow>
-                        <TableCell className="supply_theadfont">
-                          Issue key
-                        </TableCell>
-                        <TableCell className="supply_theadfont">
-                          Summary
-                        </TableCell>
-                        <TableCell className="supply_theadfont">
-                          Issue type
-                        </TableCell>
-                        <TableCell className="supply_theadfont">
-                          Status
-                        </TableCell>
-                        <TableCell className="supply_theadfont">
-                          Assignee
-                        </TableCell>
+                        <TableCell className="theadfont">Issue key</TableCell>
+                        <TableCell className="theadfont">Summary</TableCell>
+                        <TableCell className="theadfont">Issue type</TableCell>
+                        <TableCell className="theadfont">Status</TableCell>
+                        <TableCell className="theadfont">Assignee</TableCell>
                       </TableRow>
                     </thead>
                     <tbody>
