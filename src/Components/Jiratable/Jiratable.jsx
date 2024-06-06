@@ -37,25 +37,22 @@ const Jiratable = () => {
     } else {
       jqlQuery = `project=KAN AND status='${status}'`;
     }
+    // const jqlQuery = 'project=KAN AND status="In Progress"';
     try {
       const pagesize_url = pagesize; // Set your desired page size
       const nextPage_url = nextPage; // Set your desired page number
 
+      // const jqlQuery = `project=KAN AND status=${status_url}`;
       const encodedJql = encodeURIComponent(jqlQuery);
 
       const response = await axios.get(
-        `${
-          process.env.REACT_APP_JIRA_BASE_URL
-        }/rest/api/3/search?jql=${encodedJql}&maxResults=${pagesize_url}&startAt=${
+        `rest/api/3/search?jql=${encodedJql}&maxResults=${pagesize_url}&startAt=${
           nextPage_url * 10
         }`,
         {
           headers: {
-            Authorization: `Basic ${`${process.env.REACT_APP_EMAIL}:${process.env.REACT_APP_JIRA_API_KEY}`}`,
+            Authorization: `Basic ${process.env.REACT_APP_JIRA_API_KEY}`,
             Accept: "application/json",
-            "Cache-Control": "no-cache",
-            Pragma: "no-cache",
-            Expires: "0",
           },
         }
       );
