@@ -1,7 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useState, useEffect } from "react";
 import Image from "../Assets/Images/surveylisting.svg";
-import axios from "axios";
+import { axiosPrivate } from "../../api/axios";
 import Paginations from "../Pagination/Pagination";
 import Table from "react-bootstrap/Table";
 import { Col, Row } from "react-bootstrap";
@@ -27,35 +27,21 @@ const Jiratable = () => {
 
   useEffect(() => {
     CallJiraApi(filter_status);
+    // eslint-disable-next-line
   }, [pagesize, nextPage]);
-
   const CallJiraApi = async (status) => {
-    setLoaderState(true);
+    console.log(filter_status, "filter_statusfilter_status");
+
     let jqlQuery;
     if (status === undefined) {
-      jqlQuery = `project=KAN`;
+      jqlQuery = `search?maxResults=${pagesize}&startAt=${nextPage}`;
     } else {
-      jqlQuery = `project=KAN AND status='${status}'`;
+      jqlQuery = `search?status=${status}&maxResults=${pagesize}&startAt=${nextPage}`;
     }
-    // const jqlQuery = 'project=KAN AND status="In Progress"';
+    setLoaderState(true);
     try {
-      const pagesize_url = pagesize; // Set your desired page size
-      const nextPage_url = nextPage; // Set your desired page number
-
-      // const jqlQuery = `project=KAN AND status=${status_url}`;
-      const encodedJql = encodeURIComponent(jqlQuery);
-
-      const response = await axios.get(
-        `rest/api/3/search?jql=${encodedJql}&maxResults=${pagesize_url}&startAt=${
-          nextPage_url * 10
-        }`,
-        {
-          headers: {
-            Authorization: `Basic ${process.env.REACT_APP_JIRA_API_KEY}`,
-            Accept: "application/json",
-          },
-        }
-      );
+      const response = await axiosPrivate.get(jqlQuery);
+      console.log(response, "resssss");
       setData(response.data.issues);
       setData_Length(response.data.total);
     } catch (err) {
@@ -71,7 +57,6 @@ const Jiratable = () => {
     }
     setLoaderState(false);
   };
-
   return (
     <>
       <div className="top_container">
@@ -119,11 +104,12 @@ const Jiratable = () => {
                   size={30}
                   onClick={() => {
                     setShow(!show);
-                    setFilter_status();
+                    setFilter_status(filter_status);
                     CallJiraApi();
                   }}
                 />
               </Col>
+              <></>
             </Row>
           ) : null}
           <div className="mainContent mainContent2">
